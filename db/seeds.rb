@@ -20,7 +20,7 @@ specialtys = ["Obstétrique", "Gatro", "Générale", "Chirurgie", "Pré-natale",
   city = City.create!(city_name: Faker::Nation.capital_city)
 end
 
-10.times do 
+10.times do
   specialty = Specialty.create(specialty: specialtys[rand(0..9)])
 end
 
@@ -29,8 +29,7 @@ end
                         firts_name: Faker::Name.first_name,
                         last_name: Faker::Name.last_name,
                         zip_code: Faker::Number.between(from: 10000, to: 99999),
-                        city_id: t+1,
-                        specialty_id: t+1)
+                        city_id: t+1)
 end
 
 10.times do |t|
@@ -44,7 +43,14 @@ end
     appointment = Appointment.create(
                         date: DateTime.new(2023,2,18),
                         doctor_id: t+1,
-                        patient_id: t+1)
+                        patient_id: t+1,
+                        city_id: t+1)
+end
+
+10.times do |t|
+  join_table_specialty_doctors = JoinTableSpecialtyDoctor.create(
+                        doctor_id: t+1,
+                        specialty_id: t+1)
 end
 
 

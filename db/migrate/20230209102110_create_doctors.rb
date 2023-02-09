@@ -3,7 +3,6 @@ class CreateDoctors < ActiveRecord::Migration[7.0]
     create_table :doctors do |t|
       t.string :firts_name
       t.string :last_name
-      t.belongs_to :specialty, index: true
       t.belongs_to :city, index: true
       t.string :zip_code
       t.timestamps

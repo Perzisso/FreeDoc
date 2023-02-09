@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_150454) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_173102) do
   create_table "appointments", force: :cascade do |t|
     t.datetime "date"
     t.integer "doctor_id"
     t.integer "patient_id"
+    t.integer "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_appointments_on_city_id"
     t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
   end
@@ -30,13 +32,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_150454) do
   create_table "doctors", force: :cascade do |t|
     t.string "firts_name"
     t.string "last_name"
-    t.integer "specialty_id"
     t.integer "city_id"
     t.string "zip_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_doctors_on_city_id"
-    t.index ["specialty_id"], name: "index_doctors_on_specialty_id"
+  end
+
+  create_table "join_table_specialty_doctors", force: :cascade do |t|
+    t.integer "doctor_id"
+    t.integer "specialty_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_join_table_specialty_doctors_on_doctor_id"
+    t.index ["specialty_id"], name: "index_join_table_specialty_doctors_on_specialty_id"
   end
 
   create_table "patients", force: :cascade do |t|
